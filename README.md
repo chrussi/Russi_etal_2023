@@ -1,5 +1,5 @@
-# mestrado
-Este repositório apresenta o material suplementar de minha dissertação, a ser defendida em agosto de 2023.
+# MESTRADO
+Este repositório disponibiliza o material suplementar de minha dissertação, a ser defendida em agosto de 2023.
 
 O repositório está dividido em 3 pastas:
 1. ANÁLISES: Contém dados e scripts necessários para reproduzir as análises;
