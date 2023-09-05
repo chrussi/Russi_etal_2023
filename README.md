@@ -1,5 +1,5 @@
 # Spatiotemporal variation in bat assemblages along a subtropical elevational gradient
-Este repositório disponibiliza o material suplementar de minha dissertação, a ser defendida em agosto de 2023.
+Este repositório disponibiliza o material suplementar de minha dissertação, a ser defendida em setembro de 2023.
 
 O repositório está dividido em 3 pastas:
 1. ANÁLISES: Contém dados e scripts necessários para reproduzir as análises;
