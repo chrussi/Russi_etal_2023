@@ -10,11 +10,11 @@ model {
    #### 2. ABUNDANCE PRIORS ####
    ### 2.1 SPECIES FIXED ABUNDANCE INTERCEPT (LOG SCALE) ###
    for (k in 1:nspec){ 
-   lambda.b0[k] ~ dnorm(0,0.1)
+   lambda.b0[k] ~ dnorm(0,0.01)
    }
 
    ### 2.2 SPECIES ABUNDANCE SLOPES AS FUNCTION OF PHYLOGENY ###
-   lambda.p ~ dunif(0,1)  #phylogenetic signal prior
+   lambda.p ~ dunif(0,1)  #phylogenetic signal prior, uniform distribution between 0 and 1
    mt.lambda[1:nspec,1:nspec] <- lambda.p*VCOV[,,CC] + (1-lambda.p)*ID[,] #phylogenetic signal formula
    for(b in 1:5){ # coefficients
    sigma.lambda[b] ~ dunif(0,20) 
@@ -24,7 +24,7 @@ model {
    }}
   
    ### 2.3 SPATIALLY STRUCTURED SITE-ABUNDANCE RANDOM EFFECT TO OVERDISPERSION ###
-    a.spt ~ dunif(0,24.02) #24.02 = max distance between sites
+    a.spt ~ dunif(0,24.02) #spatial autocorrelation prior, uniform distribution between 0 and 24.02. 24.02 = max distance between sites 
     sigma.spt ~ dunif(0,20)  # variance at dist = 0
     for (i in 1:nsites) {
        zeros.spt[i] <- 0
@@ -37,8 +37,8 @@ model {
 
      #### 3. CAPTURE/DETECTION PRIORS ####
      for(p in 1:2){ # Loop over 2 sampling methods, p1=mist nets, ARU
-     ### 3.1 COMMUNITY-SHARED P ###
-      p.bar[p] ~ dbeta(1,1)T(0.001,0.999) # equal detection prob under average environmental conditions for all species
+     ### 3.1 COMMUNITY-SHARED P ### equal detection prob under average environmental conditions for all species
+      p.bar[p] ~ dbeta(1,1)T(0.001,0.999) # beta distribution
       
      ### 3.2. SPECIES DETECTION SLOPES AS FUNCTION OF PHYLOGENY ###
       det.p[p] ~ dunif(0,1)  #phylogenetic signal prior
