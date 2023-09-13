@@ -1,4 +1,4 @@
-
+#September 2023. Code written by Carlos Henrique Russi.
 model {
 
    #### 1. SELECT PHYLOGENY SAMPLE OVER 1,000 AVAILABLE ####
@@ -10,11 +10,11 @@ model {
    #### 2. ABUNDANCE PRIORS ####
    ### 2.1 SPECIES FIXED ABUNDANCE INTERCEPT (LOG SCALE) ###
    for (k in 1:nspec){ 
-   lambda.b0[k] ~ dnorm(0,0.01)
+   lambda.b0[k] ~ dnorm(0,0.01) # normal distribution with mean 0 and precision 0.01
    }
 
    ### 2.2 SPECIES ABUNDANCE SLOPES AS FUNCTION OF PHYLOGENY ###
-   lambda.p ~ dunif(0,1)  #phylogenetic signal prior, uniform distribution between 0 and 1
+   lambda.p ~ dunif(0,1)  #phylogenetic signal prior; uniform distribution between 0 and 1
    mt.lambda[1:nspec,1:nspec] <- lambda.p*VCOV[,,CC] + (1-lambda.p)*ID[,] #phylogenetic signal formula
    for(b in 1:5){ # coefficients
    sigma.lambda[b] ~ dunif(0,20) 
@@ -51,7 +51,7 @@ model {
       }}}
 
    #### 4. MODEL LOOP ####
-   for(k in 1:nspec){                # Loop over species
+   for(k in 1:nspec){   # Loop over species
      for (i in 1:nsites){ # Loop over sites
        for (s in 1:nseasons){ # Loop over seasons
       
